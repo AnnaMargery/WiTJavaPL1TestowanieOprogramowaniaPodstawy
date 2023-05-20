@@ -28,6 +28,24 @@ class StringUtilTest {
     }
 
     @Test
+    void shouldReturnTrueIfInputIsEmpty() {
+        //when
+        boolean result = StringUtil.isBlank("");
+        //then
+        assertTrue(result); //jUnit
+        assertThat(result).isTrue(); //assertJ
+    }
+
+    @Test
+    void shouldReturnTrueIfInputIsEmptyWithSpaces() {
+        //when
+        boolean result = StringUtil.isBlank("    ");
+        //then
+        assertTrue(result); //jUnit
+        assertThat(result).isTrue(); //assertJ
+    }
+
+    @Test
     void shouldReturnFalseIfInputISNotEmpty() {
         //when
         boolean result = StringUtil.isBlank("programowanie");
