@@ -27,4 +27,22 @@ class StringUtilTest {
         assertThat(result).isTrue(); //assertJ
     }
 
+    @Test
+    void shouldReturnFalseIfInputISNotEmpty() {
+        //when
+        boolean result = StringUtil.isBlank("programowanie");
+        //then
+        assertFalse(result); //jUnit
+        assertThat(result).isFalse(); //assertJ
+    }
+
+    @Test
+    void shouldReturnFalseIfInputISNotEmpty_2() {
+        //when
+        boolean result = StringUtil.isBlank("java    ");
+        //then
+        assertFalse(result); //jUnit
+        assertThat(result).isFalse(); //assertJ
+    }
+
 }
