@@ -23,33 +23,36 @@ public class Account {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public void transferMoney(Account account, float amount) {
-        //if(this.getAccountNumber().length() == 26 && account.getAccountNumber().length() == 26) {
-        if(validateAccountNumber(this) && validateAccountNumber(account)) {
+        if(validate(account, amount)) {
             transfer(account, amount);
-        } else {
-            System.out.println("Wrong account number!");
         }
+    }
+
+    private boolean validate(Account account, float amount) {
+        return validateAccountNumber(this)
+                && validateAccountNumber(account)
+                && validateAmount(amount);
+    }
+
+    private boolean validateAccountNumber(Account account) {
+        if(account.getAccountNumber().length() != 26) {
+            System.out.println("Wrong account number: " + account.accountNumber);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateAmount(float amount) {
+        if(this.balance < amount || amount <= 0) {
+            System.out.println("Wrong value of amount");
+            return false;
+        }
+        return true;
     }
 
     private void transfer(Account account, float amount) {
         this.setBalance(this.getBalance() - amount);
         account.setBalance(account.getBalance() + amount);
-    }
-
-    private boolean validateAccountNumber(Account account) {
-        return account.getAccountNumber().length() == 26;
     }
 }
